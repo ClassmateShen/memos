@@ -5,6 +5,7 @@ import (
 	"net/url"
 	"time"
 
+	"github.com/lithammer/shortuuid/v4"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/types/known/timestamppb"
@@ -30,6 +31,7 @@ func (s *APIV2Service) CreateResource(ctx context.Context, request *apiv2pb.Crea
 	}
 
 	create := &store.Resource{
+		ResourceName: shortuuid.New(),
 		CreatorID:    user.ID,
 		Filename:     request.Filename,
 		ExternalLink: request.ExternalLink,
@@ -146,6 +148,7 @@ func (s *APIV2Service) convertResourceFromStore(ctx context.Context, resource *s
 
 	return &apiv2pb.Resource{
 		Id:           resource.ID,
+		Name:         resource.ResourceName,
 		CreateTime:   timestamppb.New(time.Unix(resource.CreatedTs, 0)),
 		Filename:     resource.Filename,
 		ExternalLink: resource.ExternalLink,

@@ -135,7 +135,7 @@ func (t *TelegramHandler) CallbackQueryHandle(ctx context.Context, bot *telegram
 		return bot.AnswerCallbackQuery(ctx, callbackQuery.ID, fmt.Sprintf("无法编辑消息 %s", err))
 	}
 
-	return bot.AnswerCallbackQuery(ctx, callbackQuery.ID, fmt.Sprintf("成功更改 Memo %d 为 %s", memoID, visibility))
+	return bot.AnswerCallbackQuery(ctx, callbackQuery.ID, fmt.Sprintf("成功更改 Memo 的可见性 %d 为 %s", memoID, visibility))
 }
 
 func generateKeyboardForMemoID(id int32) [][]telegram.InlineKeyboardButton {

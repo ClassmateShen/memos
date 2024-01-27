@@ -35,10 +35,10 @@ function Root() {
               >
                 {!collapsed ? (
                   <Button variant="plain" color="neutral" startDecorator={<Icon.ChevronLeft className="w-5 h-auto opacity-70" />}>
-                    Collapse
+                    折叠
                   </Button>
                 ) : (
-                  <Tooltip title="Expand" placement="right" arrow>
+                  <Tooltip title="展开" placement="right" arrow>
                     <IconButton>
                       <Icon.ChevronRight className="w-5 h-auto opacity-70" />
                     </IconButton>

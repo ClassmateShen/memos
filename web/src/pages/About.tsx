@@ -8,8 +8,8 @@ const About = () => {
       <MobileHeader />
       <div className="w-full px-4 sm:px-6">
         <div className="w-full shadow flex flex-col justify-start items-start px-4 py-3 rounded-xl bg-white dark:bg-zinc-800 text-black dark:text-gray-300">
-          <a href="https://www.usememos.com" target="_blank">
-            <img className="w-auto h-12" src="https://www.usememos.com/full-logo-landscape.png" alt="memos" />
+          <a href="https://memo.shenkx.com">
+            <img className="w-auto h-12" src="https://tool.shenkx.com/favicon.png" alt="memos" />
           </a>
           <p className="text-base">叫我沈同学的个人Memos～</p>
           <div className="mt-1 flex flex-row items-center flex-wrap">

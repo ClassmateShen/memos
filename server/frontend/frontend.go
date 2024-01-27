@@ -155,8 +155,8 @@ type Metadata struct {
 
 func getDefaultMetadata() *Metadata {
 	return &Metadata{
-		Title:       "Memos",
-		Description: "A privacy-first, lightweight note-taking service. Easily capture and share your great thoughts.",
+		Title:       "Memos - 叫我沈同学",
+		Description: "叫我沈同学的个人Memos～",
 		ImageURL:    "/logo.webp",
 	}
 }

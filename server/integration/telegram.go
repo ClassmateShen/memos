@@ -30,8 +30,8 @@ func (t *TelegramHandler) BotToken(ctx context.Context) string {
 }
 
 const (
-	workingMessage = "Working on sending your memo..."
-	successMessage = "Success"
+	workingMessage = "正在发送您的Memo..."
+	successMessage = "成功"
 )
 
 func (t *TelegramHandler) MessageHandle(ctx context.Context, bot *telegram.Bot, message telegram.Message, attachments []telegram.Attachment) error {
@@ -54,7 +54,7 @@ func (t *TelegramHandler) MessageHandle(ctx context.Context, bot *telegram.Bot, 
 	}
 
 	if creatorID == 0 {
-		_, err := bot.EditMessage(ctx, message.Chat.ID, reply.MessageID, fmt.Sprintf("Please set your telegram userid %d in UserSetting of memos", message.From.ID), nil)
+		_, err := bot.EditMessage(ctx, message.Chat.ID, reply.MessageID, fmt.Sprintf("请将您的Telegram Userid %d 填入设置中", message.From.ID), nil)
 		return err
 	}
 
@@ -78,7 +78,7 @@ func (t *TelegramHandler) MessageHandle(ctx context.Context, bot *telegram.Bot, 
 
 	memoMessage, err := t.store.CreateMemo(ctx, create)
 	if err != nil {
-		_, err := bot.EditMessage(ctx, message.Chat.ID, reply.MessageID, fmt.Sprintf("Failed to CreateMemo: %s", err), nil)
+		_, err := bot.EditMessage(ctx, message.Chat.ID, reply.MessageID, fmt.Sprintf("创建Memo失败: %s", err), nil)
 		return err
 	}
 
@@ -108,7 +108,7 @@ func (t *TelegramHandler) MessageHandle(ctx context.Context, bot *telegram.Bot, 
 	}
 
 	keyboard := generateKeyboardForMemoID(memoMessage.ID)
-	_, err = bot.EditMessage(ctx, message.Chat.ID, reply.MessageID, fmt.Sprintf("Saved as %s Memo %d", memoMessage.Visibility, memoMessage.ID), keyboard)
+	_, err = bot.EditMessage(ctx, message.Chat.ID, reply.MessageID, fmt.Sprintf("保存为 %s Memo %d", memoMessage.Visibility, memoMessage.ID), keyboard)
 	return err
 }
 
@@ -130,9 +130,9 @@ func (t *TelegramHandler) CallbackQueryHandle(ctx context.Context, bot *telegram
 	}
 
 	keyboard := generateKeyboardForMemoID(memoID)
-	_, err = bot.EditMessage(ctx, callbackQuery.Message.Chat.ID, callbackQuery.Message.MessageID, fmt.Sprintf("Saved as %s Memo %d", visibility, memoID), keyboard)
+	_, err = bot.EditMessage(ctx, callbackQuery.Message.Chat.ID, callbackQuery.Message.MessageID, fmt.Sprintf("更改Memo %d 可见度为 %s ", memoID, visibility), keyboard)
 	if err != nil {
-		return bot.AnswerCallbackQuery(ctx, callbackQuery.ID, fmt.Sprintf("Failed to EditMessage %s", err))
+		return bot.AnswerCallbackQuery(ctx, callbackQuery.ID, fmt.Sprintf("无法编辑Memo %s", err))
 	}
 
 	return bot.AnswerCallbackQuery(ctx, callbackQuery.ID, fmt.Sprintf("Success changing Memo %d to %s", memoID, visibility))
